@@ -83,6 +83,8 @@ router.get('/:id', StoryController.getStoryById);
  *                 format: binary
  *               location:
  *                 type: string
+ *               caption:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Story created successfully
