@@ -1,0 +1,53 @@
+const Project = require('../models/Project');
+const ApiResponse = require('../utils/apiResponse');
+const FileService = require('../services/fileService');
+
+class ProjectController {
+  static async getAllProjects(req, res, next) {
+    try {
+      const projects = await Project.find().sort({ createdAt: -1 });
+      return ApiResponse.success(res, projects, 'Projects retrieved successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async createProject(req, res, next) {
+    try {
+      if (!req.file) {
+        return ApiResponse.error(res, 'Photo is required', 400);
+      }
+
+      const project = await Project.create({
+        photoUrl: `uploads/${req.file.filename}`,
+        title: req.body.title,
+        githubRepos: req.body.githubRepos || null,
+        deploymentUrl: req.body.deploymentUrl || null,
+        techStack: req.body.techStack,
+      });
+
+      return ApiResponse.created(res, project, 'Project created successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteProject(req, res, next) {
+    try {
+      const project = await Project.findById(req.params.id);
+
+      if (!project) {
+        return ApiResponse.error(res, 'Project not found', 404);
+      }
+
+      await FileService.deleteFile(project.photoUrl);
+      await project.deleteOne();
+
+      return ApiResponse.success(res, null, 'Project deleted successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+}
+
+module.exports = ProjectController;
