@@ -85,6 +85,59 @@ router.post('/', validate(createCommentValidator), CommentController.createComme
 
 /**
  * @swagger
+ * /api/comments:
+ *   get:
+ *     summary: Get all comments
+ *     description: Retrieve all comments from all stories sorted by newest first
+ *     tags: [Comments]
+ *     responses:
+ *       200:
+ *         description: All comments retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "All comments retrieved successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Comment'
+ *             examples:
+ *               success:
+ *                 summary: Successful response
+ *                 value:
+ *                   success: true
+ *                   message: "All comments retrieved successfully"
+ *                   data:
+ *                     - _id: "65fabc123456"
+ *                       storyId: "65fab9998888"
+ *                       comment: "Keren banget 🔥"
+ *                       createdAt: "2025-12-27T10:00:00Z"
+ *                     - _id: "65fabc123457"
+ *                       storyId: "65fab9998889"
+ *                       comment: "Mantap!"
+ *                       createdAt: "2025-12-27T09:30:00Z"
+ *                     - _id: "65fabc123458"
+ *                       storyId: "65fab9998888"
+ *                       comment: "Nice work!"
+ *                       createdAt: "2025-12-27T09:00:00Z"
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponseError'
+ */
+router.get('/', CommentController.getAllComments);
+
+/**
+ * @swagger
  * /api/comments/story/{storyId}:
  *   get:
  *     summary: Get comments by story

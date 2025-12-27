@@ -29,6 +29,15 @@ class CommentController {
     }
   }
 
+  static async getAllComments(req, res, next) {
+    try {
+      const comments = await Comment.find().sort({ createdAt: -1 });
+      return ApiResponse.success(res, comments, 'All comments retrieved successfully');
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async getCommentsByStory(req, res, next) {
     try {
       const comments = await Comment.find({

@@ -9,7 +9,7 @@ const githubRepoSchema = new mongoose.Schema(
     },
     repoUrl: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   { _id: false }
