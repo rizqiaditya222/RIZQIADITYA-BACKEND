@@ -32,6 +32,33 @@ class ProjectController {
     }
   }
 
+  static async updateProject(req, res, next) {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    if (!project) {
+      return ApiResponse.error(res, 'Project not found', 404);
+    }
+
+    if (req.file) {
+      await FileService.deleteFile(project.photoUrl);
+      project.photoUrl = `uploads/${req.file.filename}`;
+    }
+
+    if (req.body.title !== undefined) project.title = req.body.title;
+    if (req.body.githubRepos !== undefined) project.githubRepos = req.body.githubRepos;
+    if (req.body.deploymentUrl !== undefined) project.deploymentUrl = req.body.deploymentUrl;
+    if (req.body.techStack !== undefined) project.techStack = req.body.techStack;
+
+    await project.save();
+
+    return ApiResponse.success(res, project, 'Project updated successfully');
+  } catch (error) {
+    next(error);
+  }
+}
+
+
   static async deleteProject(req, res, next) {
     try {
       const project = await Project.findById(req.params.id);
