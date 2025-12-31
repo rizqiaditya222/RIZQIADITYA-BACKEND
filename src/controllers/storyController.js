@@ -36,7 +36,13 @@ class StoryController {
         return ApiResponse.error(res, 'Photo is required', 400);
       }
 
-      const photoUrl = `${process.env.BASE_URL}/uploads/${req.file.filename}`;
+      const baseUrl = process.env.BASE_URL;
+      if (!baseUrl || baseUrl === 'undefined') {
+        console.error('BASE_URL is not set in environment variables');
+        return ApiResponse.error(res, 'Server configuration error', 500);
+      }
+
+      const photoUrl = `${baseUrl}/uploads/${req.file.filename}`;
 
       const story = await Story.create({
         caption: req.body.caption || null,

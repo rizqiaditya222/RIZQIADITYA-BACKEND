@@ -2,6 +2,7 @@ const Joi = require('joi');
 
 const createProjectValidator = Joi.object({
   title: Joi.string().required().trim().min(3).max(100),
+  description: Joi.string().max(2000).optional().allow(null, ''),
   githubRepos: Joi.array()
     .items(
       Joi.object({
@@ -17,6 +18,7 @@ const createProjectValidator = Joi.object({
 
 const updateProjectValidator = Joi.object({
   title: Joi.string().trim().min(3).max(100).optional(),
+  description: Joi.string().max(2000).optional().allow(null, ''),
   githubRepos: Joi.array()
     .items(
       Joi.object({

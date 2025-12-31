@@ -91,6 +91,11 @@ const options = {
               example: 'http://localhost:5000/uploads/project-1.png',
             },
             title: { type: 'string', example: 'My Portfolio App' },
+            description: {
+              type: 'string',
+              nullable: true,
+              example: 'A short description of the project',
+            },
             githubRepos: {
               type: 'array',
               items: {

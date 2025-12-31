@@ -21,6 +21,7 @@ class ProjectController {
       const project = await Project.create({
         photoUrl: `${process.env.BASE_URL}/uploads/${req.file.filename}`,
         title: req.body.title,
+        description: req.body.description || null,
         githubRepos: req.body.githubRepos || null,
         deploymentUrl: req.body.deploymentUrl || null,
         techStack: req.body.techStack,
@@ -46,6 +47,7 @@ class ProjectController {
     }
 
     if (req.body.title !== undefined) project.title = req.body.title;
+    if (req.body.description !== undefined) project.description = req.body.description;
     if (req.body.githubRepos !== undefined) project.githubRepos = req.body.githubRepos;
     if (req.body.deploymentUrl !== undefined) project.deploymentUrl = req.body.deploymentUrl;
     if (req.body.techStack !== undefined) project.techStack = req.body.techStack;

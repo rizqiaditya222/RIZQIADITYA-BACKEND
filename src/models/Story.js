@@ -35,7 +35,6 @@ const storySchema = new mongoose.Schema(
 
     expiredAt: {
       type: Date,
-      required: true,
       default: () => new Date(Date.now() + 24 * 60 * 60 * 1000),
     },
   },

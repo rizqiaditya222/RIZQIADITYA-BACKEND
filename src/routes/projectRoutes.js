@@ -39,6 +39,7 @@ const router = express.Router();
  *                     - _id: "66proj123"
  *                       photoUrl: "uploads/project-1.png"
  *                       title: "My Portfolio App"
+ *                       description: "A short description of the project"
  *                       githubRepos:
  *                         - repoName: "portfolio-backend"
  *                           repoUrl: "https://github.com/rizqi/portfolio"
@@ -74,6 +75,10 @@ router.get('/', ProjectController.getAllProjects);
  *                 type: string
  *                 description: Project title
  *                 example: "My Portfolio App"
+ *               description:
+ *                 type: string
+ *                 description: Project description
+ *                 example: "A short description of the project"
  *               githubRepos:
  *                 type: string
  *                 description: JSON stringified array of GitHub repositories
@@ -115,6 +120,7 @@ router.get('/', ProjectController.getAllProjects);
  *                     _id: "66proj123"
  *                     photoUrl: "uploads/project-1234567890.png"
  *                     title: "My Portfolio App"
+ *                     description: "A short description of the project"
  *                     githubRepos:
  *                       - repoName: "portfolio-backend"
  *                         repoUrl: "https://github.com/rizqi/portfolio"
@@ -206,6 +212,10 @@ router.get('/:id', ProjectController.getProjectById);
  *                 type: string
  *                 description: Project title
  *                 example: "Updated Portfolio App"
+ *               description:
+ *                 type: string
+ *                 description: Project description
+ *                 example: "Updated description of the project"
  *               githubRepos:
  *                 type: string
  *                 description: JSON stringified array of GitHub repositories
@@ -244,6 +254,7 @@ router.get('/:id', ProjectController.getProjectById);
  *                     _id: "66proj123"
  *                     photoUrl: "uploads/project-updated.png"
  *                     title: "Updated Portfolio App"
+ *                     description: "Updated description of the project"
  *                     githubRepos:
  *                       - repoName: "portfolio-v2"
  *                         repoUrl: "https://github.com/rizqi/portfolio-v2"
