@@ -42,6 +42,7 @@ class StoryController {
         caption: req.body.caption || null,
         photoUrl,
         location: req.body.location || '',
+        expiredAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 jam dari sekarang
       });
 
       return ApiResponse.created(res, story, 'Story created successfully');
@@ -49,6 +50,7 @@ class StoryController {
       next(error);
     }
   }
+
 
   static async deleteStory(req, res, next) {
     try {
