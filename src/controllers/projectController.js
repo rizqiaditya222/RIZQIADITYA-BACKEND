@@ -75,6 +75,22 @@ class ProjectController {
       next(error);
     }
   }
+
+  static async getProjectById(req, res, next) {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    if (!project) {
+      return ApiResponse.error(res, 'Project not found', 404);
+    }
+
+    return ApiResponse.success(res, project, 'Project retrieved successfully');
+  } catch (error) {
+    next(error);
+  }
 }
+}
+
+
 
 module.exports = ProjectController;

@@ -139,48 +139,21 @@ router.post('/', upload.single('photo'), ProjectController.createProject);
 /**
  * @swagger
  * /api/projects/{id}:
- *   put:
- *     summary: Update project
- *     description: Update an existing project (photo is optional)
+ *   get:
+ *     summary: Get project by ID
+ *     description: Retrieve a single project by its ID
  *     tags: [Projects]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID of the project to update
+ *         description: ID of the project
  *         schema:
  *           type: string
  *         example: "66proj123"
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               photo:
- *                 type: string
- *                 format: binary
- *                 description: New project photo (optional)
- *               title:
- *                 type: string
- *                 description: Project title
- *                 example: "Updated Portfolio App"
- *               githubRepos:
- *                 type: string
- *                 description: JSON stringified array of GitHub repositories
- *                 example: '[{"repoName":"portfolio-v2","repoUrl":"https://github.com/rizqi/portfolio-v2"}]'
- *               deploymentUrl:
- *                 type: string
- *                 description: Live deployment URL
- *                 example: "https://portfolio-v2.rizqiaditya.com"
- *               techStack:
- *                 type: string
- *                 description: JSON stringified array of technologies
- *                 example: '["Node.js","Express","MongoDB","Redis"]'
  *     responses:
  *       200:
- *         description: Project updated successfully
+ *         description: Project retrieved successfully
  *         content:
  *           application/json:
  *             schema:
@@ -191,42 +164,17 @@ router.post('/', upload.single('photo'), ProjectController.createProject);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Project updated successfully"
+ *                   example: "Project retrieved successfully"
  *                 data:
  *                   $ref: '#/components/schemas/Project'
- *             examples:
- *               success:
- *                 summary: Successful response
- *                 value:
- *                   success: true
- *                   message: "Project updated successfully"
- *                   data:
- *                     _id: "66proj123"
- *                     photoUrl: "uploads/project-updated.png"
- *                     title: "Updated Portfolio App"
- *                     githubRepos:
- *                       - repoName: "portfolio-v2"
- *                         repoUrl: "https://github.com/rizqi/portfolio-v2"
- *                     deploymentUrl: "https://portfolio-v2.rizqiaditya.com"
- *                     techStack: ["Node.js", "Express", "MongoDB", "Redis"]
- *                     createdAt: "2025-01-27T12:00:00Z"
  *       404:
  *         description: Project not found
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ApiResponseError'
- *             example:
- *               success: false
- *               message: "Project not found"
- *       400:
- *         description: Invalid ID format
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ApiResponseError'
  */
-router.put('/:id', upload.single('photo'), ProjectController.updateProject);
+router.get('/:id', ProjectController.getProjectById);
 
 /**
  * @swagger
