@@ -19,7 +19,7 @@ class ProjectController {
       }
 
       const project = await Project.create({
-        photoUrl: `uploads/${req.file.filename}`,
+        photoUrl: `${process.env.BASE_URL}/uploads/${req.file.filename}`,
         title: req.body.title,
         githubRepos: req.body.githubRepos || null,
         deploymentUrl: req.body.deploymentUrl || null,
@@ -42,7 +42,7 @@ class ProjectController {
 
     if (req.file) {
       await FileService.deleteFile(project.photoUrl);
-      project.photoUrl = `uploads/${req.file.filename}`;
+      project.photoUrl = `${process.env.BASE_URL}/uploads/${req.file.filename}`;
     }
 
     if (req.body.title !== undefined) project.title = req.body.title;

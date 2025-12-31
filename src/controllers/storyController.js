@@ -36,7 +36,7 @@ class StoryController {
         return ApiResponse.error(res, 'Photo is required', 400);
       }
 
-      const photoUrl = `uploads/${req.file.filename}`;
+      const photoUrl = `${process.env.BASE_URL}/uploads/${req.file.filename}`;
 
       const story = await Story.create({
         caption: req.body.caption || null,

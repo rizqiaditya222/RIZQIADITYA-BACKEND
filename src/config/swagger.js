@@ -88,7 +88,7 @@ const options = {
             _id: { type: 'string', example: '66proj123' },
             photoUrl: {
               type: 'string',
-              example: 'uploads/project-1.png',
+              example: 'http://localhost:5000/uploads/project-1.png',
             },
             title: { type: 'string', example: 'My Portfolio App' },
             githubRepos: {
@@ -131,7 +131,7 @@ const options = {
             _id: { type: 'string', example: '77story123' },
             photoUrl: {
               type: 'string',
-              example: 'uploads/story-1.jpg',
+              example: 'http://localhost:5000/uploads/story-1.jpg',
             },
             caption: {
               type: 'string',
